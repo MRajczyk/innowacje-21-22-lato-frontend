@@ -1,0 +1,59 @@
+<mat-expansion-panel>
+  <mat-expansion-panel-header class="task-container"
+    [ngClass]="{'to-do-border': robotTask.status.name === 'To Do', 'in-progress-border': robotTask.status.name === 'In Progress'}">
+
+    <mat-panel-title>
+      <div class="task-title">
+        <div class="task-name">
+          <span>{{robotTask.name}}</span>
+        </div>
+        <div class="task-status">
+          <span
+            [ngClass]="{'to-do': robotTask.status.name === 'To Do', 'in-progress': robotTask.status.name === 'In Progress'}">
+            {{robotTask.status.name}}
+          </span>
+          <mat-icon svgIcon="dot" style="transform: scale(0.2)"></mat-icon>
+          <span [ngClass]="{
+                    'priority-critical': robotTask.priority.weight === 0,
+                    'priority-important': robotTask.priority.weight === 1,
+                    'priority-normal': robotTask.priority.weight === 2,
+                    'priority-additional': robotTask.priority.weight >= 3
+          }">
+            {{robotTask.priority.name}}
+          </span>
+        </div>
+      </div>
+    </mat-panel-title>
+
+    <mat-panel-description>
+      <div class="task-time">
+        <div class="task-time-content">
+          <mat-icon svgIcon="calendar"></mat-icon>
+          <span>{{robotTask.startTime ? robotTask.startTime.split(",")[0] : ""}}</span>
+        </div>
+        <div class="task-time-content">
+          <mat-icon svgIcon="clock"></mat-icon>
+          <span>{{robotTask.startTime ? robotTask.startTime.split(",")[1] : ""}}</span>
+        </div>
+      </div>
+    </mat-panel-description>
+
+
+  </mat-expansion-panel-header>
+  <div class="mat-expansion-panel-content">
+    <div class="task-info">
+      <div class="added-by info-header">Dodano przez</div>
+      <div class="author">(Tu get usera)</div>
+      <div class="task-chain info-header">Łańcuch zadań</div>
+      <div class="chain">
+        <ng-template ngFor let-item [ngForOf]="robotTask.behaviours">
+          <div class="small-task-card">
+            {{item.name}}
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</mat-expansion-panel>
+
+

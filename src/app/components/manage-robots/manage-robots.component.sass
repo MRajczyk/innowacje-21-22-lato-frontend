@@ -1,0 +1,303 @@
+::ng-deep .p-tabview .p-tabview-nav li .p-tabview-nav-link:focus
+  background: none
+
+::ng-deep .p-tabview .p-tabview-nav .p-tabview-ink-bar
+  background-color: var(--main-color)
+
+::ng-deep .p-tabview .p-tabview-nav-link
+  padding: 20px 40px !important
+  height: 100%
+
+.manage-robots-container
+  margin: 30px auto
+  padding: 0 50px
+  max-width: var(--container-width)
+
+  h2, h4
+    color: var(--font-color)
+
+  h2
+    letter-spacing: 2px
+    font-weight: 800
+
+  main
+    margin-top: 20px
+    display: flex
+    gap: 40px
+    justify-content: space-around
+
+    .left
+      width: 100%
+
+.list-wrapper
+    position: relative
+    width: 100%
+
+    .robots-list
+        height: 1010px
+        border-radius: 12px
+        overflow: hidden
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1)
+        background: white
+
+        .list-heading
+          margin-top: 10px
+          font-size: 14px
+          font-weight: 600
+
+          .name-heading
+            margin-left: 10px
+
+        h4
+          font-size: 18px
+          font-weight: 700
+
+        ol
+          margin-top: 15px
+          padding-right: 30px
+          counter-reset: item
+          list-style-type: none
+          height: 885px
+          overflow-y: scroll
+
+          li
+            margin: 10px 0
+            display: flex
+
+            .list-item
+              padding: 15px
+              border: 1px solid #ccc
+              border-radius: 5px
+              font-size: 13px
+              min-width: 200px
+              width: 100%
+              user-select: none
+              display: flex
+              justify-content: space-between
+              align-items: center
+
+              .list-item-header
+                .list-item-name
+                  color: black
+                  font-weight: 700
+
+                .list-item-type
+                  color: #999
+
+              .buttons
+                img
+                  margin-left: 10px
+
+                img:hover
+                  opacity: .8
+
+            .list-item:hover
+              cursor: pointer
+
+            .active
+              outline: 2px solid #487bff
+
+          li:before
+            content: counter(item) " "
+            counter-increment: item
+            margin-top: 12px
+            margin-right: 5px
+            width: 25px
+
+          li:last-child
+            margin-bottom: 50px
+
+        .addButton
+          position: absolute
+          background: var(--green-btn)
+          right: 46px
+          bottom: 15px
+
+        .addButton:hover
+          background: var(--green-btn-hover) !important
+
+        .buttons
+            display: flex
+            flex-direction: column
+            justify-content: space-around
+            margin-left: 10px
+
+        .buttons img:hover
+            cursor: pointer
+            opacity: .8
+
+.count
+  border-radius: 50%
+  background: var(--green-btn)
+  color: white
+  margin-left: 15px
+  width: 30px
+  height: 30px
+  text-align: center
+  vertical-align: middle
+  line-height: 30px
+
+.robot-form
+  flex-direction: column
+
+  .buttons-container
+    display: flex
+    justify-content: flex-end
+
+    .discard-button
+      background: none
+      border: none
+      outline: none
+      color: var(--red)
+      font-weight: 700
+      margin-right: 20px
+      transition: .2s ease-out
+
+    .discard-button:hover
+      cursor: pointer
+      color: var(--red-hover)
+
+    .addButton
+      position: static !important
+
+  .field
+    padding: 8px
+    background: white
+    width: 100%
+    border: 1px solid #aaa
+    border-radius: 5px
+    margin-bottom: 10px
+
+  h3
+    margin-top: 15px
+    margin-bottom: 5px
+    font-weight: 700
+
+  label
+    font-weight: 700
+    font-size: 12px
+    opacity: .8
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button
+    -webkit-appearance: none
+    margin: 0
+
+  input[type=number]
+    -moz-appearance: textfield
+
+
+.sidebar
+  background: white
+
+.addButton
+  min-width: 100px
+  height: 40px
+  font-size: 14px
+  transition: .2s ease-out
+
+.add-robot-button
+  background: var(--green-btn)
+  width: 50px
+  height: 100%
+  margin: auto
+
+.add-robot-button:hover, .add-robot-button:active, .add-robot-button:focus
+  background: var(--green-btn-hover)
+
+.right
+  width: 100%
+
+  .card
+    background: white
+    border-radius: 12px
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1)
+    width: 100%
+    padding-top: 20px
+
+    .header
+      display: flex
+      justify-content: space-between
+      margin: 0 20px
+      color: var(--font-color)
+      font-size: 18px
+      padding-bottom: 15px
+
+      .card-title h3
+        font-weight: 700
+        font-size: 18px
+        margin: 0
+
+      .coordinates
+        padding: 2px
+        .coordinate
+          margin-left: 15px
+          display: inline-block
+          min-width: 60px
+
+    .map-module
+      height: 500px
+      width: 100%
+      background: lightgrey
+      overflow: hidden
+
+.robots-list
+  .title
+    font-weight: 700
+    font-size: 18px
+    color: var(--font-color)
+
+.right
+  .card.logs
+    margin-top: 37px
+    height: 400px
+    overflow-y: scroll
+
+.icons
+  display: flex
+  .icon
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    align-items: center
+    min-width: 80px
+    font-size: 12px
+
+    .availability
+      color: var(--font-color)
+
+    .status
+      font-weight: 700
+
+    .warning-status
+      color: var(--warning-color)
+
+    .error-status
+      color: var(--error-color)
+
+    .battery-icon
+      height: 30px
+      width: 16px
+      background-image: url('/assets/icons/battery.svg')
+      display: flex
+      flex-direction: column
+      justify-content: flex-end
+
+      .battery-fill-wrapper
+        height: 24px
+        display: flex
+        flex-direction: column
+        justify-content: flex-end
+        width: 14px
+        margin: 1px 1px
+
+        .battery-icon-fill
+          display: inline-block
+          background: #008926
+
+::ng-deep .p-tabview .p-tabview-panels
+  margin-right: 0
+  padding-right: 0
+
+.inactive
+  opacity: .4

@@ -1,0 +1,84 @@
+<mat-drawer-container hasBackdrop="false">
+  <mat-drawer #templates_drawer mode="over" position="end" class="drawer-container">
+    <div class="drawer-content">
+      <div class="card-title">
+        <span>Dodawanie nowego użytkownika</span>
+      </div>
+      <form (ngSubmit)="onSubmit()" [formGroup]="form" class="form-group">
+        <mat-list class="list-container">
+          <h3 class="temp">Identyfikator użytkownika</h3>
+            <input class="field" placeholder="Wpisz nazwę" matInput [formControlName]='"name"'>
+          <h3 class="temp">Rola użytkownika</h3>
+          <select matNativeControl placeholder="Wybierz odbiornik" class="dropdown-field">
+            <option [ngValue]='"stand"' class="dropdown-field" >
+              Admin
+            </option>
+          </select>
+          <h3 class="temp">Podaj hasło</h3>
+            <input type="password" class="field" placeholder="Wpisz nazwę" matInput [formControlName]='"password"'>
+          <h3 class="temp">Powtórz hasło</h3>
+            <input type="password" class="field" placeholder="Wpisz nazwę" matInput [formControlName]='"repassword"'>
+        </mat-list>
+      <div class="buttons-container">
+        <button class="discard-button" type="button" (click)="templates_drawer.toggle()">Anuluj</button>
+        <button class="addButton" type="submit" (click)="templates_drawer.toggle()">Dodaj</button>
+      </div>
+      </form>
+    </div>
+  </mat-drawer>
+  <div class="container-fluid w-100 main-container px-4">
+    <div class="row title">
+      <span>Użytkownicy</span>
+    </div>
+    <div class="row main-section m-3">
+      <div class="col-7">
+        <div class="w-100 card cardList">
+          <div class="top-section">
+            <input [(ngModel)]="term" placeholder="Wpisz użytkownika" class="search-kiosk">
+            <button class="addButton" (click)="templates_drawer.toggle()">
+              + Dodaj kolejny model
+            </button>
+          </div>
+          <div class="kiosk-list">
+            <div class="kiosk-sort">
+              <div class="sort">
+                Identyfikator użytkownika
+                <button class="imageButton">
+                  <img src="/assets/icons/sort.png" alt="sort">
+                </button>
+              </div>
+              <div class="sort">
+                Role
+                <button class="imageButton">
+                  <img src="/assets/icons/sort.png" alt="sort">
+                </button>
+              </div>
+              <div class="sort">
+                Ostatnie działanie
+                <button class="imageButton">
+                  <img src="/assets/icons/sort.png" alt="sort">
+                </button>
+              </div>
+              <div class="sort">
+                Data utworzenia
+                <button class="imageButton">
+                  <img src="/assets/icons/sort.png" alt="sort">
+                </button>
+              </div>
+            </div>
+            <ul class="kiosk-items-list">
+              <div class="kiosk-item" *ngFor="let item of users | search:'name':term">
+                <div class="single-kiosk">
+                  <ra-user-element
+                    (getUserStatusChange) = "onGetUsers()"
+                    [userName]="item"></ra-user-element>
+                </div>
+              </div>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-drawer-container>
+

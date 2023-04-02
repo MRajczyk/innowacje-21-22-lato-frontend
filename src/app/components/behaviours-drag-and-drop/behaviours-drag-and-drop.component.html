@@ -1,0 +1,38 @@
+<div
+  class="behaviours-list"
+  #behaviourList="cdkDropList"
+  [cdkDropListData]="behaviours"
+  [cdkDropListConnectedTo]="[sequenceList]"
+  cdkDropList
+  cdkDropListSortingDisabled
+>
+  <div class="behaviour-elements" *ngFor="let behaviour of behaviours" cdkDrag>
+    <mat-icon style="color: #BABABA; transform: scale(0.75)">drag_indicator</mat-icon>
+    {{behaviour.name}}
+  </div>
+</div>
+<div
+  class="test-behaviour-list"
+  cdkDropList
+  #sequenceList="cdkDropList"
+  [cdkDropListData]="sequences"
+  (cdkDropListDropped)="drop($event)">
+  <div class="test-behaviour-elements" *ngFor="let sequence of sequences; index as i" cdkDrag>
+    <span style="font-weight: 600">{{i + 1}}</span>
+    <div class="sequence-card">
+      <div class="sequence-info">
+        <span style="font-weight: 600">{{sequence.name}}</span>
+        <span>{{sequence.parameters}}</span>
+      </div>
+      <div class="elementImage">
+        <button type="button" (click)="openBehaviourDialog(i)" class="imageButton">
+          <mat-icon svgIcon="edit"></mat-icon>
+        </button>
+        <button type="button" (click)="removeSequence(i)" class="imageButton">
+          <mat-icon svgIcon="bin"></mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,19 @@
+<div class="dialog-container">
+  <form [formGroup] = "form">
+  <h1 mat-dialog-title>Utwórz kiosk</h1>
+  <div mat-dialog-content>
+    <p>Podaj nazwę kiosku, który chcesz utworzyć</p>
+      <div class="dialog-input-position">
+        <input #input maxlength="20" placeholder="Nazwa kiosku" class="dialog-input" matInput [formControlName] = '"name"'>
+        <span class="suffix">{{input.value?.length}}/20</span>
+      </div>
+  </div>
+  <div mat-dialog-actions class="dialog-actions">
+    <button class="cancel" (click)="onNoClick()">Anuluj</button>
+    <button class="add" type = "submit" (click)="createKiosk()">
+      <img src="/assets/icons/diskette.png" alt="dis">
+      Utwórz
+    </button>
+  </div>
+  </form>
+</div>

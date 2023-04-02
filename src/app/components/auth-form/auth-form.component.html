@@ -1,0 +1,25 @@
+<form (ngSubmit)="onSubmit()" [ngClass]="loginFailed ? 'login-failed' : ''">
+    <h3>Logowanie</h3>
+    <div class="user-wrap">
+        <label class="label">
+            <span class="label-content">
+                <img src="/assets/login-img/envelope-icon.svg" alt="" class="icon envelope-icon">
+                Login
+            </span>
+        </label>
+        <input type="text" name="login" required placeholder="Wpisz login" [(ngModel)]="name">
+    </div>
+    <div class="pass-wrap">
+        <label class="label">
+            <span class="label-content">
+                <img src="/assets/login-img/lock-icon.svg" alt="" class="icon lock-icon">
+                Hasło
+            </span>
+        </label>
+        <input type="password" name="password" required placeholder="Wpisz hasło" [(ngModel)]="password">
+        <div class="info-wrapper">
+            <span *ngIf="loginFailed" class="incorrect">Niepoprawne dane logowania</span>
+        </div>
+    </div>
+    <input type="submit" value="Zaloguj" class="submit" name="login-submit">
+</form>

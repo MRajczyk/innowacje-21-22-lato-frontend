@@ -1,0 +1,247 @@
+.container
+  margin: 0
+  padding: 0
+
+.main-container
+  display: flex
+  flex-direction: column
+
+.main-section
+  flex-grow: 1
+
+.mat-button-toggle
+  background: #EEEEEE
+  border-radius: 25px
+  color: #727272
+  font-weight: 700
+  font-size: 16px
+  line-height: 24px
+  margin: 3px
+
+//.filter-groups-container
+//  display: flex
+//  flex-wrap: nowrap
+//  overflow: scroll
+//  max-width: 100%
+
+.mat-button-toggle-checked
+  background: #487BFF
+  border-radius: 25px
+  color: #FFFFFF
+
+.card
+  background: #FFFFFF
+  border: 1px solid rgba(72, 123, 255, 0.2)
+  box-shadow: 0 0 40px rgba(72, 123, 255, 0.15)
+  border-radius: 12px
+  display: flex
+  flex-direction: column
+  height: 80vh
+
+.cardTaskForm
+  background: #FFFFFF
+  display: flex
+  flex-direction: column
+  height: 80vh
+  overflow: auto
+
+.cardTaskAddForm
+  border: 1px solid #00E5AE
+  box-shadow: 0 0 40px rgba(72, 123, 255, 0.15)
+  border-radius: 12px
+
+.cardTaskEditForm
+  border: 1px solid #487BFF
+  box-shadow: 0 0 40px rgba(72, 123, 255, 0.15)
+  border-radius: 12px
+
+.submit, .edit, .cancel
+  border-radius: 10px
+  padding: 15px
+  font-size: 16px
+  font-weight: 700
+  color: white
+  margin: 20px
+  line-height: 24px
+  background-repeat: no-repeat
+  border: none
+  cursor: pointer
+  overflow: hidden
+  outline: none
+  display: flex
+  align-items: center
+  justify-content: space-around
+
+.submit:disabled, .edit:disabled, .cancel:disabled,
+.submit:disabled:hover, .edit:disabled:hover, .cancel:disabled:hover
+  background-color: var(--disabled-btn)
+  border-color: var(--disabled-btn)
+
+.submit
+  background-color: var(--green-btn)
+  border-color: var(--green-btn)
+
+.edit:hover
+  background-color: var(--blue-btn-hover)
+  border-color: var(--blue-btn-hover)
+
+.submit:hover
+  background-color: var(--green-btn-hover)
+  border-color: var(--green-btn-hover)
+
+.edit
+  background-color: var(--blue-btn)
+  border-color: var(--blue-btn)
+
+.task-list
+  flex-grow: 1
+  overflow: scroll
+
+.title
+  font-weight: 800
+  font-size: 24px
+  line-height: 24px
+  letter-spacing: 0.15em
+  color: #3C3C3C
+  padding: 20px
+
+
+.card-title
+  font-style: normal
+  font-weight: 700
+  font-size: 18px
+  line-height: 24px
+  color: #3C3C3C
+  margin: 33px 30px 16px 30px
+
+.filters, .task-item
+  display: flex
+  flex-direction: row
+  flex-wrap: nowrap
+
+.left-section
+  padding: 1% 1% 1% 3%
+  flex-grow: 5
+  min-width: 300px
+  max-width: 90%
+
+.left-section-filters
+  padding: 1% 1% 1% 3%
+  flex-grow: 5
+  max-width: 100%
+
+.right-section
+  padding: 1% 3% 1% 1%
+  align-content: center
+  display: flex
+  flex-direction: column
+  justify-content: flex-start
+  align-items: center
+
+.right-section > button
+  all: unset
+  cursor: pointer
+  margin: 9px
+  mat-icon
+    transform: scale(1)
+
+.right-section-filter
+  @extend .right-section
+  flex-direction: row
+  justify-content: center
+
+.filter-button
+  transform: scale(1.15) !important
+
+.filter
+  display: flex
+  flex-direction: row
+  justify-content: center
+  align-items: center
+  padding: 8px 16px
+  gap: 8px
+  background: #EEEEEE
+  border-radius: 25px
+  font-weight: 700
+  font-size: 16px
+  line-height: 24px
+  color: #727272
+
+.imageButton
+  background-color: transparent
+  background-repeat: no-repeat
+  border: none
+  cursor: pointer
+  overflow: hidden
+  outline: none
+
+::ng-deep .filter-form-group
+  border: none
+
+.form-group
+  margin: 3px 30px 3px 30px
+  display: flex
+  flex-direction: column
+  flex-wrap: nowrap
+
+.form-container
+  display: flex
+  flex-direction: column
+  flex-wrap: nowrap
+  height: 79vh
+  justify-content: space-between
+
+.containerButton
+  flex-direction: row
+  display: flex
+  justify-content: space-between
+
+.card-title
+  font-style: normal
+  font-weight: 700
+  font-size: 18px
+  line-height: 24px
+  color: #3C3C3C
+  margin: 16px 30px 8px 30px
+
+.form-content
+  flex-grow: 1
+
+.chip
+  font-weight: 700
+  font-size: 16px
+  display: flex
+  align-items: center
+  justify-content: space-between
+  color: #FFFFFF
+  padding: 8px 16px !important
+  background: #487BFF
+  border-radius: 25px
+
+::ng-deep .chip-icon
+  color: #FFFFFF !important
+  opacity: 100 !important
+  margin-left: 16px !important
+
+.filter-chip
+  background: #487BFF
+
+.sorting-chip
+  background: #18AB88
+
+mat-chip > button
+  background-repeat: no-repeat
+  border: none
+  cursor: pointer
+  overflow: hidden
+  outline: none
+  display: flex
+  background-color: inherit
+
+.field
+  padding: 8px
+  background: white
+  width: 100%
+  border: 1px solid #aaa
+  border-radius: 5px
+  margin-bottom: 10px

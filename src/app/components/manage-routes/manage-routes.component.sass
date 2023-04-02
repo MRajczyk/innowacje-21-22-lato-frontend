@@ -1,0 +1,187 @@
+.container
+  margin: 30px auto
+  padding: 0 50px
+  max-width: var(--container-width)
+
+  h2, h4
+    color: var(--font-color)
+
+  h2
+    letter-spacing: 2px
+    font-weight: 800
+
+  main
+    margin-top: 20px
+    display: flex
+
+    .map-module
+      height: 800px
+      flex: .60
+      background: lightgray
+      border-radius: 12px
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1)
+
+    .list-wrapper
+      position: relative
+      flex: .40
+
+      .graphs-list
+        height: 800px
+        margin-left: 40px
+        border-radius: 12px
+        padding: 20px 30px
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1)
+        overflow-y: scroll
+        background: white
+
+        .list-heading
+          margin-top: 10px
+          font-size: 14px
+          font-weight: 600
+
+          .name-heading
+            margin-left: 10px
+
+        h4
+          font-size: 18px
+          font-weight: 700
+
+        ol
+          margin-top: 15px
+          padding-left: 0
+          counter-reset: item
+          list-style-type: none
+
+          li
+            margin: 10px 0
+            display: flex
+
+            .list-item
+              padding: 15px
+              border: 1px solid #ccc
+              border-radius: 5px
+              font-size: 13px
+              min-width: 200px
+              width: 100%
+              user-select: none
+              display: flex
+              justify-content: space-between
+              align-items: center
+
+              .list-item-header
+                .list-item-name
+                  color: black
+                  font-weight: 700
+
+                .list-item-type
+                  color: #999
+
+              .buttons
+                img
+                  margin-left: 10px
+
+                img:hover
+                  opacity: .8
+
+            .list-item:hover
+              cursor: pointer
+
+            .active
+              outline: 2px solid #487bff
+
+          li:before
+            content: counter(item) " "
+            counter-increment: item
+            margin-top: 12px
+            margin-right: 5px
+
+          li:last-child
+            margin-bottom: 50px
+
+        .addButton
+          position: absolute
+          right: 46px
+          bottom: 15px
+
+.graph-form
+  height: 100%
+  flex-direction: column
+
+  .buttons-container
+    display: flex
+    justify-content: flex-end
+
+    .discard-button
+      background: none
+      border: none
+      outline: none
+      color: var(--red)
+      font-weight: 700
+      margin-right: 20px
+      transition: .2s ease-out
+
+    .discard-button:hover
+      cursor: pointer
+      color: var(--red-hover)
+
+    .addButton
+      position: static !important
+
+  .field
+    display: block
+    padding: 8px
+    background: white
+    width: 100%
+    border: 1px solid #aaa
+    border-radius: 5px
+    margin-bottom: 10px
+
+  .field-short
+    max-width: 160px
+
+  .field + label
+    display: inline
+
+  h3
+    margin-top: 15px
+    margin-bottom: 5px
+    font-weight: 700
+
+  label
+    font-weight: 700
+    font-size: 12px
+    opacity: .8
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button
+    -webkit-appearance: none
+    margin: 0
+
+  input[type=number]
+    -moz-appearance: textfield
+
+
+.sidebar
+  background: white
+
+.addButton
+  width: 220px
+  height: 40px
+  font-size: 14px
+  padding: 0
+  transition: .2s ease-out
+
+.addButton:hover
+  background: var(--green-btn-hover)
+
+.new-graph-dialog
+  width: 50vw
+
+.field
+  display: block
+  padding: 8px
+  background: white
+  width: 100%
+  border: 1px solid #aaa
+  border-radius: 5px
+  margin-bottom: 10px

@@ -1,0 +1,118 @@
+.ra-container
+    display: flex
+    flex-direction: row
+    width: 100%
+    height: 100%
+    min-height: 530px
+
+    header, .login-wrapper
+        width: 100%
+
+    header
+        color: white
+        position: relative
+        overflow: hidden
+
+        .bg-img
+            background-image: url('../../../assets/login-img/production-g24528d040_1920 1.png')
+            background-repeat: no-repeat
+            background-size: cover
+            background-position: center
+            filter: blur(3px)
+            background-color: #000
+            height: 100%
+            transform: scale(1.1)
+            overflow: hidden
+
+        .bg-text
+            position: absolute
+            background-color: rgb(0,0,0)
+            background-color: rgba(0,0,0, 0.3)
+            top: 0
+            left: 0
+            height: 100%
+            width: 100%
+            z-index: 2
+
+            h1
+                position: absolute
+                width: 450px
+                text-align: center
+                font-weight: 700
+                font-size: 32px
+                top: 50%
+                left: 50%
+                transform: translate(-50%, 0)
+
+            .zalando-logo
+                width: 360px
+                height: auto
+                position: absolute
+                top: 50%
+                left: 50%
+                transform: translate(-50%, -50%)
+                padding-bottom: 270px
+
+            .hetbot-logo
+                width: 260px
+                height: auto
+                position: absolute
+                bottom: 40px
+                left: 50%
+                transform: translate(-50%, 0)
+
+    .login-wrapper
+        background-color: white
+        z-index: 2
+        display: flex
+        justify-content: center
+        align-items: center
+
+@media only screen and (max-width: 1000px)
+    .container
+        header
+            min-height: 650px
+
+            .bg-text
+                h1
+                    width: 380px
+                    font-size: 26px
+
+                .hetbot-logo
+                    width: 160px
+
+                .zalando-logo
+                    width: 220px
+                    padding-bottom: 170px
+
+@media only screen and (max-width: 800px)
+    .container
+        flex-direction: column
+        position: relative
+
+        header
+            height: 100%
+
+            .bg-img
+                height: 100%
+
+            .bg-text
+                h1, .zalando-logo
+                    display: none
+
+                .hetbot-logo
+                    width: 200px
+
+        .login-wrapper
+            position: absolute
+            top: 50%
+            left: 50%
+            transform: translate(-50%, -50%)
+            width: 370px
+            margin: auto
+            border-radius: 15px
+
+
+
+
+

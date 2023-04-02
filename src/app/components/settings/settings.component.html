@@ -1,0 +1,37 @@
+<div class="container h-100">
+  <div>
+    <div class="row title">
+      <span>Ustawienia</span>
+    </div>
+    <div class="row main-container p-3 m-3 h-75">
+      <div class="row p-3">
+        <div class="p-2 top-section">
+          <div class="col left-section">
+            <span class="tab-button" [style.color]="toggle ? '#487BFF' : 'black'" (click)="changeTab()">Mapy i grafy</span>
+            <span class="tab-button" [style.color]="!toggle ? '#487BFF' : 'black'"  (click)="changeTab()">Dane instancji</span>
+          </div>
+          <div class="col-9">
+            <button class="save-change float-end"
+                    [style.background-color]="(mapData.mapChanged || instanceInfoData.instanceChange) ? '#18AB88' : '#EEEEEE'"
+                    [style.color]="(mapData.mapChanged || instanceInfoData.instanceChange) ? '#FFFFFF' : '#3C3C3C'"
+                    (click)="saveData()">
+              Zapisz zmiany
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="row map-section">
+        <div *ngIf="toggle">
+          <p>
+            <ra-settings-maps (onMapChanged)="onMapChange($event)"></ra-settings-maps>
+          </p>
+        </div>
+        <div *ngIf="!toggle">
+          <ra-settings-instances (onInstanceChanged)="onInstanceChange($event)"></ra-settings-instances>
+        </div>
+      </div>
+      <div class="row p-3 graph-section">
+      </div>
+    </div>
+  </div>
+</div>

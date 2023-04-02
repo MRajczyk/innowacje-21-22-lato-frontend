@@ -1,0 +1,98 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css"
+@import "~primeicons/primeicons.css"
+
+@import "~bootstrap/dist/css/bootstrap.css"
+@import "~@angular/material/prebuilt-themes/indigo-pink.css"
+
+@import "~bootstrap/dist/css/bootstrap.css"
+
+html
+  box-sizing: border-box
+
+*, *:before, *:after
+  box-sizing: inherit
+  margin: 0
+  padding: 0
+
+body, html
+  height: 100%
+  min-height: 100%
+  font-family: 'Open Sans', sans-serif !important
+
+::ng-deep *
+  margin: 0
+  padding: 0
+
+:root
+  --disabled-btn: #a1a0a0
+  --green-btn: #18AB88
+  --green-btn-hover: #079A77
+  --blue-btn: #487BFF
+  --blue-btn-hover: #184acb
+  --red: #dc0135
+  --red-hover: #a5092d
+  --font-color: #3c3c3c
+  --topBarHeight: 64px
+  --main-color: #487BFF
+  --switch-background-color: #DBFFF6
+  --switch-background-color-hover: #AAFFEB
+  --switch-foreground-color: #00E5AE
+  --error-color: #E2574C
+  --warning-color: #FFB423
+  --battery-level-color: #008926
+  --container-width: 2500px
+
+// reset/override
+.mat-drawer-container, .mat-drawer-backdrop, .mat-drawer-content
+  z-index: inherit !important
+
+.mat-h3, .mat-subheading-2, .mat-typography .mat-h3, .mat-typography .mat-subheading-2, .mat-typography h3          //...
+  font-family: 'Open Sans', sans-serif
+
+body .p-component
+  font-family: 'Open Sans', sans-serif
+
+.p-component-overlay
+  opacity: 0
+
+.p-sidebar-md
+  width: 450px !important
+  top: var(--topBarHeight) !important
+  height: calc(100% - var(--topBarHeight)) !important
+  box-shadow-top: 0px
+  padding: 30px 10px 10px 30px
+  border-radius: 5px
+
+  .p-sidebar-header
+    display: none
+
+//shared
+.addButton
+  background-color: var(--green-btn)
+  border-color: var(--green-btn)
+  border-radius: 10px
+  padding: 15px
+  font-size: 16px
+  font-weight: 700
+  color: white
+  line-height: 24px
+  background-repeat: no-repeat
+  border: none
+  cursor: pointer
+  overflow: hidden
+  outline: none
+
+
+// input switch
+.p-element .p-inputswitch.p-inputswitch-checked:not(.p-disabled):hover .p-inputswitch-slider
+  background: var(--switch-background-color-hover)
+
+.p-element .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider
+  background: var(--switch-background-color)
+
+.p-element .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider::before
+  background: var(--switch-foreground-color)
+
+.p-element .p-inputswitch
+  height: 1.4rem
+  font-size: 14px

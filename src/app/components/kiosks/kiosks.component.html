@@ -1,0 +1,36 @@
+<div class="container-fluid w-100 main-container px-4">
+  <div class="row title">
+    <span>Zarządzaj Kioskami</span>
+  </div>
+  <div class="row main-section m-3">
+    <div class="col-7">
+      <div class="w-100 card cardList">
+        <div class="top-section">
+          <input [(ngModel)]="term" placeholder="Wpisz nazwę kiosku" class="search-kiosk">
+          <button class="addButton" (click)="createKiosk()">
+            + Dodaj kolejny kiosk
+          </button>
+        </div>
+        <div class="kiosk-list">
+          <div class="kiosk-sort">
+            <div class="sort">
+              Nazwa kiosku
+              <button class="imageButton">
+                <img src="/assets/icons/sort.png" alt="sort">
+              </button>
+            </div>
+          </div>
+          <ul class="kiosk-items-list">
+            <div class="kiosk-item" *ngFor="let item of kiosk | search:'name':term">
+                <div class="single-kiosk">
+                  <ra-kiosk-element
+                    (getKioskStatusChange) = "onGetKiosks()"
+                    [kiosk]="item"></ra-kiosk-element>
+                </div>
+            </div>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

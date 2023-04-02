@@ -1,0 +1,168 @@
+<div class="manage-robots-container">
+    <header>
+        <h2>Zarządzaj robotami</h2>
+    </header>
+    <main>
+
+        <div class="left">
+            <div class="list-wrapper">
+                <div class="robots-list">
+                    <p-tabView (onChange)="toggleActiveSide()">
+                        <p-tabPanel>
+                            <ng-template pTemplate="header">
+                                <span class="title">
+                                    Lista robotów
+                                </span>
+                            </ng-template>
+                            <ol>
+                                <li *ngFor="let robot of robots">
+                                    <div (click)="onClickToggleRobot(robot, true)" class="list-item" [ngClass]="robot.id === selectedRobot?.id ? 'active' : 'list-item'">
+                                        <div class="list-item-header">
+                                            <div class="list-item-name"><b>{{robot.id}}</b> | Model {{ robot.model }}</div>
+                                        </div>
+
+                                        <div class="icons">
+                                            <div class="icon" *ngIf="robot.status === STATUS_WARNING">
+                                                <img  src="/assets/icons/warning-icon.svg">
+                                                <span class="status warning-status">Ostrzeżenie</span>
+                                            </div>
+                                            <div class="icon" *ngIf="robot.status === STATUS_ERROR">
+                                                <img src="/assets/icons/error-icon.svg">
+                                                <span class="status error-status">Awaria</span>
+                                            </div>
+                                            <div class="icon">
+                                                <div class="battery-icon">
+                                                    <div class="battery-fill-wrapper">
+                                                        <span class="battery-icon-fill" [style]="'flex: ' + robot.batteryLevel * 0.01"></span>
+                                                    </div>
+                                                </div>
+
+                                                <span class="battery-level"> {{ robot.batteryLevel + '%'}}</span>
+                                            </div>
+                                            <div class="icon">
+                                                <p-inputSwitch [ngModel]="robot.available" (click)="onClickToggleRobot(robot, true)" (click)="toggleSelectedRobotAvailable()"></p-inputSwitch>
+                                                <span class="availability">{{ robot.available ? "Dostępny" : "Niedostępny" }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="buttons">
+                                        <img (click)="onClickToggleRobot(robot, true)" (click)="showEditSidebar(EDIT_ROBOT, robot.id)" src="/assets/icons/draw.png" alt="edit">
+                                        <img (click)="onDelete(robot)" src="/assets/icons/bin.png" alt="delete">
+                                    </div>
+                                </li>
+                            </ol>
+
+                            <p-sidebar [(visible)]="displayEditSidebar" position="right" [modal]="false" styleClass="p-sidebar-md">
+                                <form class="robot-form" [formGroup]="editForm" (ngSubmit)="onSubmitEditRobot()">
+
+                                    <h2>{{sidebarHeader}}</h2>
+
+                                    <label for="robot-name-input">Nazwa robota</label>
+                                    <input type="text" class="field" name="robot-name-input" id="robot-name-input" formControlName="name">
+
+                                    <label for="robot-ip-input">IP robota</label>
+                                    <input type="text" class="field" name="robot-ip-input" id="robot-ip-input" formControlName="ip">
+
+                                    <label for="robot-model-input">Model</label>
+                                    <input type="text" class="field" name="robot-model-input" id="robot-model-input" formControlName="model">
+
+                                    <label for="robot-status-input">Status</label>
+                                    <input type="text" class="field" name="robot-status-input" id="robot-status-input" formControlName="status">
+
+                                    <label for="robot-battery-input">Poziom baterii</label>
+                                    <input type="text" class="field" name="robot-battery-input" id="robot-battery-input" formControlName="battery">
+
+                                    <div class="buttons-container">
+                                        <button type="button" class="discard-button" (click)="hideEditSidebar()">
+                                            Anuluj
+                                        </button>
+
+                                        <button pButton type="submit" iconPos="left" label="Zatwierdź" class="addButton" icon="pi pi-check"></button>
+                                    </div>
+                                </form>
+                            </p-sidebar>
+                        </p-tabPanel>
+
+                        <p-tabPanel>
+                            <ng-template pTemplate="header">
+                                <span class="title">
+                                    Do akceptacji
+                                </span>
+                                <span class="count">{{robotsToApprove.length}}</span>
+                            </ng-template>
+                            <ol>
+                                <li *ngFor="let robot of robotsToApprove">
+                                    <div (click)="onClickToggleRobotToApprove(robot, true)" class="list-item" [ngClass]="robot.id === selectedRobotToApprove?.id ? 'active' : 'list-item'">
+                                        <div class="list-item-header">
+                                            <div class="list-item-name"><b>{{robot.id}}</b> | Model {{ robot.model }}</div>
+                                        </div>
+                                    </div>
+                                    <div class="buttons">
+                                        <button pButton icon="pi pi-plus" class="add-robot-button" (click)="onClickToggleRobotToApprove(robot, true)" (click)="showAddSidebar(ADD_ROBOT, robot.id)" src="/assets/icons/draw.png" alt="edit"></button>
+                                    </div>
+                                </li>
+                            </ol>
+
+                            <p-sidebar [(visible)]="displayAddSidebar" position="right" [modal]="false" styleClass="p-sidebar-md">
+                                <form class="robot-form" [formGroup]="form" (ngSubmit)="onSubmitRobotToApprove()">
+
+                                    <h2>{{sidebarHeader}}</h2>
+
+                                    <label for="robot-name-input">Nazwa robota</label>
+                                    <input type="text" class="field" name="robot-name-input" id="robot-name-input" formControlName="name">
+
+                                    <label for="robot-ip-input">IP robota</label>
+                                    <input type="text" class="field" name="robot-ip-input" id="robot-ip-input" formControlName="ip">
+
+                                    <label for="robot-model-input">Model</label>
+                                    <input type="text" class="field" name="robot-model-input" id="robot-model-input" formControlName="model">
+
+                                    <label for="robot-status-input">Status</label>
+                                    <input type="text" class="field" name="robot-status-input" id="robot-status-input" formControlName="status">
+
+                                    <label for="robot-battery-input">Poziom baterii</label>
+                                    <input type="text" class="field" name="robot-battery-input" id="robot-battery-input" formControlName="battery">
+
+                                    <div class="buttons-container">
+                                        <button type="button" class="discard-button" (click)="hideAddSidebar()">
+                                            Anuluj
+                                        </button>
+
+                                        <button pButton type="submit" iconPos="left" label="Zatwierdź" class="addButton" icon="pi pi-check"></button>
+                                    </div>
+                                </form>
+                            </p-sidebar>
+                        </p-tabPanel>
+                    </p-tabView>
+                </div>
+            </div>
+
+        </div>
+        <div class="right" [class]="rightSideActive ? '' : 'inactive'">
+            <div id="karta" class="card">
+                <div class="header">
+                    <div class="card-title">
+                        <h3>Położenie robota</h3>
+                    </div>
+
+                    <div *ngIf="selectedRobot && rightSideActive" class="coordinates">
+                        <span class="coordinate">X: {{ selectedRobot.pose.position.x }} </span>
+                        <span class="coordinate">Y: {{ selectedRobot.pose.position.y }} </span>
+                        <span class="coordinate">Z: {{ selectedRobot.pose.position.z }} </span>
+                    </div>
+                </div>
+
+                <ra-map class="map-module" type="robot-viewer" #map></ra-map>
+
+            </div>
+            <div class="card logs">
+                <div class="header">
+                    <div class="card-title">
+                        <h3>Logi robota</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>

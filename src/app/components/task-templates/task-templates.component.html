@@ -1,0 +1,228 @@
+<script src="task-templates.component.ts"></script>
+<link rel="stylesheet" href="task-templates.component.sass">
+<div class="container-fluid h-100 main-container px-4">
+
+  <div class="modal">
+
+  </div>
+
+  <div class="row title">
+
+    <span>Zarządzaj zadaniami</span>
+
+  </div>
+
+  <div class="row main-section m-3">
+
+    <div class="col-7">
+      <div class="w-100 card cardList">
+
+        <div class="card-title">
+          <span>Lista Szablonów zadań</span>
+        </div>
+        <div class="filters">
+          <div class="left-section">
+            <mat-chip-list #chipFilters>
+
+              <mat-chip *ngIf="filterDialogForm.getRawValue().sorting !== 0" class="chip sorting-chip">
+                <span>Sortuj po&nbsp;</span>
+                <div [ngSwitch]="filterDialogForm.getRawValue().sorting">
+                  <span *ngSwitchCase="1">priorytecie</span>
+                  <span *ngSwitchCase="2">nazwie</span>
+                  <span *ngSwitchCase="3">dacie</span>
+                </div>
+                <button (click)="toggleSortOrder()">
+                  <mat-icon class="chip-icon" *ngIf="!sortAsc">arrow_drop_down</mat-icon>
+                  <mat-icon class="chip-icon" *ngIf="sortAsc">arrow_drop_up</mat-icon>
+                </button>
+              </mat-chip>
+
+              <mat-chip *ngIf="filterDialogForm.getRawValue().name !== null"
+                        (removed)='removeChip("name")' class="chip filter-chip">
+                <span>Szukaj po&nbsp;</span>
+                <span>{{filterDialogForm.getRawValue().name}}</span>
+                <mat-icon class="chip-icon" matChipRemove>cancel</mat-icon>
+              </mat-chip>
+
+              <mat-chip *ngIf="filterDialogForm.getRawValue().priority !== null"
+                        (removed)='removeChip("priority")' class="chip filter-chip">
+                <span>{{filterDialogForm.getRawValue().priority.name}}</span>
+                <mat-icon class="chip-icon" matChipRemove>cancel</mat-icon>
+              </mat-chip>
+
+              <mat-chip *ngIf="filterDialogForm.getRawValue().kiosk !== null"
+                        (removed)='removeChip("kiosk")' class="chip filter-chip">
+                <span>{{filterDialogForm.getRawValue().kiosk.name}}</span>
+                <mat-icon class="chip-icon" matChipRemove>cancel</mat-icon>
+              </mat-chip>
+
+            </mat-chip-list>
+          </div>
+          <div class="right-section">
+            <button class="filter-button" (click)="openFilterModal()">
+              <mat-icon svgIcon="filter-button"></mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="task-list">
+          <div class="list">
+            <ul>
+              <mat-accordion [togglePosition]="'before'" *ngFor="let item of filteredTaskTemplates$ | async">
+                <div class="task-item">
+                  <div class="left-section">
+                    <ra-template-item [taskTemplate]="item" [templateKiosk]="findKioskByTemplate(item)"></ra-template-item>
+                  </div>
+                  <div class="right-section">
+                    <button (click)="onTaskEdit(item)">
+                      <mat-icon svgIcon="edit"></mat-icon>
+                    </button>
+                    <button (click)="onTaskDelete(item)">
+                      <mat-icon svgIcon="bin"></mat-icon>
+                    </button>
+                  </div>
+                </div>
+              </mat-accordion>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="col-5">
+      <div class="w-100 d-inline-block cardTaskForm"
+           [ngClass]='{"cardTaskAddForm": !taskFormEdit, "cardTaskEditForm": taskFormEdit}'>
+
+        <form class="form-container" [formGroup]="taskForm" (ngSubmit)="onTaskSubmit()">
+          <div class="form-content">
+            <div class="card-title">
+              <span [hidden]="taskFormEdit">Dodaj nowy szablon</span>
+              <span [hidden]="!taskFormEdit">Edytuj szablon</span>
+            </div>
+
+            <div class="form-group">
+              <label for="task-name">Nazwa zadania</label>
+                <input class="field" type="text" id="task-name" placeholder="Wpisz nazwe"
+                       formControlName="name" required>
+            </div>
+
+            <div class="form-group">
+              <label for="kiosk">Kiosk</label>
+                <select id="kiosk" formControlName="kioskId" class="field" required>
+                  <option *ngFor="let kiosk of kiosks" [ngValue]="kiosk.id"
+                          [selected]="kiosk.id === this.taskFormKiosk" class="dropdown-item">
+                    {{kiosk.name}}
+                  </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+              <label for="task-priority">Priorytet zadania</label>
+                <select id="task-priority" formControlName="priority" class="field" required>
+                  <option *ngFor="let priority of taskPriorities" [ngValue]="priority"
+                          [selected]="priority.id === this.taskFormPriority.id" class="dropdown-item">
+                    {{priority.name}}
+                  </option>
+                </select>
+            </div>
+
+            <div class="card-title">
+              <span>Sekwencja zachowań</span>
+            </div>
+            <div class="form-group">
+              <ra-behaviours-drag-and-drop [sequences]="sequences"></ra-behaviours-drag-and-drop>
+            </div>
+          </div>
+
+          <div class="containerButton">
+            <button class="cancel" type="button" (click)="onCancelButton()">Anuluj</button>
+            <button class="submit" type="submit" [disabled]="taskForm.invalid" [hidden]="taskFormEdit">
+              <mat-icon svgIcon="add" style="transform: scale(0.5)"></mat-icon>
+              <span>Dodaj</span>
+            </button>
+            <button class="edit" type="submit" [disabled]="taskForm.invalid" [hidden]="!taskFormEdit">
+              <mat-icon svgIcon="save" style="transform: scale(0.75)"></mat-icon>
+              <span>Zapisz</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<ng-template #templateFiltersDialog>
+  <div class="cardFilterForm">
+    <form class="form-container" [formGroup]="filterDialogForm" (ngSubmit)="onFilterModalSubmit()">
+      <mat-dialog-content>
+        <div class="form-conent">
+          <div class="card-title">
+            <span>Filtrowanie i sortowanie</span>
+          </div>
+          <div class="card-description">
+            <span>Wybierz statusy i informacje, które chcesz wyświetlać na liście.</span>
+          </div>
+
+          <div class="form-group">
+            <label for="search-task-name">Nazwa zadania</label>
+              <input matInput type="text" id="search-task-name" placeholder="Podaj nazwe zadania"
+                     formControlName="name" class="field">
+          </div>
+
+          <div class="form-group">
+            <label for="filter-task-priority">Priorytet</label>
+              <select formControlName="priority" id="filter-task-priority" class="field">
+                <option [ngValue]="null"
+                        [selected]="null === filterDialogForm.getRawValue().priority?.id" class="dropdown-item">
+                  Wszystkie Priorytety
+                </option>
+                <option *ngFor="let priority of taskPriorities" [ngValue]="priority"
+                        [selected]="priority.id === filterDialogForm.getRawValue().priority?.id" class="dropdown-item">
+                  {{priority.name}}
+                </option>
+              </select>
+          </div>
+
+          <div class="form-group">
+            <label for="filter-task-kiosk">Kiosk</label>
+              <select id="filter-task-kiosk" formControlName="kiosk" class="field">
+                <option [ngValue]="null"
+                        [selected]="null === filterDialogForm.getRawValue().kiosk?.id" class="dropdown-item">
+                  Wszystkie Kioski
+                </option>
+                <option *ngFor="let kiosk of kiosks" [ngValue]="kiosk"
+                        [selected]="kiosk.id === filterDialogForm.getRawValue().kiosk?.id" class="dropdown-item">
+                  {{kiosk.name}}
+                </option>
+              </select>
+          </div>
+
+          <mat-divider></mat-divider>
+
+          <div class="form-group">
+            <label for="sorting">Sortuj po</label>
+              <select class="field" id="sorting" formControlName="sorting">
+                <option [ngValue]="0" [selected]="filterDialogForm.getRawValue().sorting === 0" class="dropdown-item">
+                  Brak
+                </option>
+                <option [ngValue]="1" [selected]="filterDialogForm.getRawValue().sorting === 1" class="dropdown-item">
+                  Priorytet
+                </option>
+                <option [ngValue]="2" [selected]="filterDialogForm.getRawValue().sorting === 2" class="dropdown-item">
+                  Nazwa
+                </option>
+              </select>
+          </div>
+
+        </div>
+      </mat-dialog-content>
+      <mat-dialog-actions align="end">
+        <button class="cancel-button" mat-button type="button" (click)="onFilterNoClick()">Anuluj</button>
+        <button class="submit-button" mat-button type="submit" cdkFocusInitial>Filtruj</button>
+      </mat-dialog-actions>
+    </form>
+  </div>
+</ng-template>

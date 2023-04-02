@@ -1,0 +1,121 @@
+*
+  box-sizing: content-box
+
+.priority-important
+  color: #DC0135
+  border-color: #DC0135
+
+.priority-critical
+  color: #CC00FF
+  border-color: #CC00FF
+
+.priority-normal
+  color: #EBA111
+  border-color: #EBA111
+
+.priority-additional
+  color: #18AB88
+  border-color: #18AB88
+
+mat-expansion-panel-header
+  background: #FFFFFF
+  border: 1px solid grey
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.25)
+  border-radius: 4px
+  padding: 15px !important
+  line-height: 24px
+
+::ng-deep .task-container > span
+  display: flex
+  justify-content: space-between !important
+
+.mat-expansion-panel-content
+  border-left: 1px solid grey
+  border-right: 1px solid grey
+  border-bottom: 1px solid grey
+  //box-shadow: 0 0 4px rgba(0, 0, 0, 0.25)
+  border-radius: 4px
+
+::ng-deep mat-panel-title, mat-panel-description
+  flex-grow: 0 !important
+
+.task-title
+  display: flex
+  flex-direction: column
+  align-items: flex-start
+  font-weight: 600
+  font-size: 16px
+
+.task-status
+  display: flex
+  align-items: center
+  flex-wrap: nowrap
+  font-weight: 400
+  font-size: 14px
+
+.task-time
+  display: flex
+  flex-direction: column
+  align-items: flex-start
+  font-weight: 400
+  font-size: 14px
+
+.task-time-content
+  display: flex
+  align-items: center
+  mat-icon
+    transform: scale(0.85)
+
+.task-info
+  display: grid
+  grid-template-columns: 2fr 5fr
+  grid-template-rows: auto
+  grid-column-gap: 0
+  grid-row-gap: 0
+  grid-auto-rows: auto
+  //grid-auto-columns: min-content
+  padding: 10px
+
+.task-chain
+  grid-column: 1
+  grid-row: 1
+  text-wrap: avoid
+
+.chain
+  grid-column: 2
+  grid-row: 1
+  display: flex
+  flex-wrap: wrap
+
+.small-task-card
+  margin: 2px
+  padding: 2px
+  background: #FFFFFF
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.25)
+  border-radius: 4px
+  font-weight: 600
+  font-size: 14px
+  flex-grow: 0
+
+.info-header
+  font-weight: 400
+  font-size: 14px
+  line-height: 24px
+  color: #979797
+
+.order-task-button
+  font-weight: 700
+  font-size: 16px
+  line-height: 24px
+  display: flex
+  align-items: center
+  color: #487BFF
+  background-repeat: no-repeat
+  border: none
+  cursor: pointer
+  overflow: hidden
+  outline: none
+  background-color: inherit
+
+.order-task-button:hover
+  text-decoration: underline

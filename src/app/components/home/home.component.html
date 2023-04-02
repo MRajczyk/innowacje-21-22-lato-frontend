@@ -1,0 +1,90 @@
+<mat-drawer-container hasBackdrop="false" class="container-fluid h-100 main-container px-4">
+
+  <mat-drawer #templates_drawer mode="over" position="end">
+    <div class="drawer-content">
+      <div class="card-title">
+        <span>Lista Szablonów zadań</span>
+      </div>
+      <mat-list class="list-container">
+        <div class="list-item" *ngFor="let item of taskTemplates$ | async">
+          <ra-template-item [taskTemplate]="item" [templateKiosk]="findKioskByTemplate(item)"></ra-template-item>
+        </div>
+      </mat-list>
+      <div class="containerButton">
+        <button class="cancel" type="button" (click)="templates_drawer.toggle()">Zamknj</button>
+      </div>
+    </div>
+  </mat-drawer>
+
+  <mat-drawer-content>
+    <div class="row title">
+      <span>Monitor Akcji</span>
+    </div>
+    <div class="row main-section m-3">
+      <div class="col-8 map-container">
+        <ra-map type="actions-monitor" class="map" #map></ra-map>
+      </div>
+      <div class="col-4">
+        <div class="w-100 d-inline-block card">
+          <mat-tab-group mat-stretch-tabs>
+            <mat-tab label="Zadania">
+
+              <div class="tab-content">
+                <div class="list-container">
+                  <mat-list>
+                    <ra-small-task-item [robotTask]="task"
+                                        *ngFor="let task of robotsTasks$ | async"></ra-small-task-item>
+                  </mat-list>
+                </div>
+                <div class="button-container">
+                  <button class="showAll" type="button" [routerLink]="'/manage_tasks'">Pokaż Wszystkie</button>
+                  <button class="submit" type="submit" (click)="templates_drawer.toggle()">
+                    <mat-icon svgIcon="add" style="transform: scale(0.5)"></mat-icon>
+                    <span>Zleć</span>
+                  </button>
+                </div>
+              </div>
+
+            </mat-tab>
+            <mat-tab label="Roboty">
+              <div class="list-wrapper">
+                <div class="robots-list">
+                  <ol>
+                    <li *ngFor="let robot of map.robots">
+                      <div class="list-item" [ngClass]="robot.status === STATUS_ERROR ? 'robot-error' : robot.status === STATUS_WARNING ? 'robot-warning' : 'list-item'">
+                        <div class="list-item-header">
+                          <div class="list-item-name"><b>{{robot.id}}</b></div>
+                          <div class="list-item-name">{{robot.robotIp}}</div>
+                        </div>
+
+                        <div class="icons">
+                          <div class="icon" *ngIf="robot.status === STATUS_WARNING">
+                            <img  src="/assets/icons/warning-icon.svg">
+                            <span class="status warning-status">Ostrzeżenie</span>
+                          </div>
+                          <div class="icon" *ngIf="robot.status === STATUS_ERROR">
+                            <img src="/assets/icons/error-icon.svg">
+                            <span class="status error-status">Awaria</span>
+                          </div>
+                          <div class="icon">
+                            <div class="battery-icon">
+                              <div class="battery-fill-wrapper">
+                                <span class="battery-icon-fill" [style]="'flex: ' + robot.batteryLevel * 0.01"></span>
+                              </div>
+                            </div>
+
+                            <span class="battery-level"> {{ robot.batteryLevel + '%'}}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  </ol>
+                </div>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </div>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

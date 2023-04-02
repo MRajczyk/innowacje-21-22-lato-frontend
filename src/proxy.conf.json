@@ -1,0 +1,8 @@
+{
+    "*": {
+        "target": "http://api3.smart.dell.edc.co.pl",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true
+    }
+}

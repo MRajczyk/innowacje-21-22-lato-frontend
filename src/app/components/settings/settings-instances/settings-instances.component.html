@@ -1,0 +1,36 @@
+<div class="container p-1">
+
+  <div class="row instance-container pt-1 pb-4">
+    <div class="settings-section">
+      <div class="col-3">
+        <span>Nazwa instancji</span>
+      </div>
+      <div class="col">
+        <input (blur)="onInstanceName($event)" placeholder="Wpisz nazwę instancji" class="input">
+      </div>
+    </div>
+  </div>
+
+  <div class="row instance-container pt-4 pb-4">
+    <div class="settings-section">
+      <div class="col-3">
+        <span>Adres instacji</span>
+      </div>
+      <div class="col">
+        <input (blur)="onInstanceAddress($event)" placeholder="Wpisz adres instancji" class="input">
+      </div>
+    </div>
+  </div>
+
+  <div class="row instance-container pt-4 pb-4">
+    <div class="settings-section">
+      <div class="col-3">
+        <span>Opis instancji</span>
+      </div>
+      <div class="col">
+        <textarea (blur)="onInstanceDescription($event)" placeholder="Wpisz opis instancji" class="text-area" rows="10"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+

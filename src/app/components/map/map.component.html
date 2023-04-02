@@ -1,0 +1,46 @@
+<div class="body">
+  <div class="map-container" #container>
+    Ładowanie mapy...
+  </div>
+
+  <div style="visibility: hidden" class="cm" #nodeContextMenu>
+    <label>
+      <img src="/assets/map/bin.svg" alt="[bin]"/>
+      <input type="button" (click)="onNodeDelete()"/>
+      <span class="text-danger">Usuń wierzchołek</span>
+    </label>
+    <label class="cm-sep">Wybierz typ wierzchołka</label>
+    <label *ngFor="let nodeType of nodeTypesDesc">
+      <input type="radio" name="node-type" value="{{nodeType.value}}" [checked]="selectedGraphNodeType===nodeType.value" (change)="onNodeTypeChanged($event)"/>
+      <img src="/assets/map/check.svg" alt="[tick]" class="rb-check"/>
+      <span>{{nodeType.name}}</span>
+    </label>
+  </div>
+
+  <div style="visibility: hidden" class="cm" #edgeContextMenu>
+    <label>
+      <img src="/assets/map/bin.svg" alt="[bin]"/>
+      <input type="button" (click)="onEdgeDelete()"/>
+      <span class="text-danger">Usuń krawędź grafu</span>
+    </label>
+    <label>
+      <img src="/assets/map/reverse.svg" alt="[reverse]"/>
+      <input type="button" (click)="onEdgeReverse()"/>
+      <span class="text-reverse">Zamień zwrot</span>
+    </label>
+    <label>
+      <span>Aktywna</span>
+      <p-inputSwitch [(ngModel)]="selectedGraphEdgeOptions.active" (onChange)="onEdgeTypeChange(true)"></p-inputSwitch>
+    </label>
+    <label>
+      <span>Dwukierunkowa</span>
+      <p-inputSwitch [(ngModel)]="selectedGraphEdgeOptions.bidirectional" (onChange)="onEdgeTypeChange(true)"></p-inputSwitch>
+    </label>
+    <label>
+      <span>Wąska</span>
+      <p-inputSwitch [(ngModel)]="selectedGraphEdgeOptions.narrow" (onChange)="onEdgeTypeChange(true)"></p-inputSwitch>
+    </label>
+  </div>
+
+  <ra-legend *ngIf="displayLegend" [mapType]="type" [nodesItems]="nodeTypesDesc" [stationsItems]="standTypes" class="legend"></ra-legend>
+</div>

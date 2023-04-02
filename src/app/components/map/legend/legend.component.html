@@ -1,0 +1,25 @@
+<button (click)="toggleLegend()" class="show-legend-button">
+    <img src="/assets/icons/legend-button-icon.svg" alt="">
+</button>
+
+<div *ngIf="legendVisible" class="legend-card">
+
+    <p-tabView>
+        <p-tabPanel *ngIf="displayStations" header="Stacje">
+            <ul class="legend-list">
+                <li *ngFor="let station of stationsItems" class="legend-item">
+                    <img [src]="'/assets/map/stand' + station.type + '.svg'" alt="" class="legend-item-icon">
+                    <span class="legend-item-name">{{ station.name }}</span>
+                </li>
+            </ul>
+        </p-tabPanel>
+        <p-tabPanel *ngIf="displayNodes" header="Węzły">
+            <ul class="legend-list">
+                <li *ngFor="let node of nodesItems" class="legend-item">
+                  <img [src]="'/assets/map/node' + node.value + '.svg'" alt="" class="legend-item-icon">
+                  <span class="legend-item-name">{{ node.name }}</span>
+                </li>
+            </ul>
+        </p-tabPanel>
+    </p-tabView>
+</div>

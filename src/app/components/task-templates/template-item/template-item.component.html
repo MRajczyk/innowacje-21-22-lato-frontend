@@ -1,0 +1,50 @@
+<mat-expansion-panel>
+  <mat-expansion-panel-header class="task-container">
+
+    <mat-panel-title>
+      <div class="task-title">
+        <div class="task-name">
+          <span>{{taskTemplate.name}}</span>
+        </div>
+        <div class="task-status">
+          <mat-icon svgIcon="home" style="transform: scale(0.7); margin-right: 2px"></mat-icon>
+          <span>
+            {{templateKiosk.name}}
+          </span>
+          <mat-icon svgIcon="dot" style="transform: scale(0.2)"></mat-icon>
+          <span [ngClass]="{
+                    'priority-critical': taskTemplate.priority.weight === 0,
+                    'priority-important': taskTemplate.priority.weight === 1,
+                    'priority-normal': taskTemplate.priority.weight === 2,
+                    'priority-additional': taskTemplate.priority.weight >= 3
+          }">
+            {{taskTemplate.priority.name}}
+          </span>
+        </div>
+      </div>
+    </mat-panel-title>
+
+    <mat-panel-description>
+      <button type="button" (click)="orderTask(taskTemplate)" class="order-task-button">
+        <span>
+          Zleć zadanie
+        </span>
+      </button>
+    </mat-panel-description>
+
+  </mat-expansion-panel-header>
+  <div class="mat-expansion-panel-content">
+    <div class="task-info">
+      <div class="task-chain info-header">Łańcuch zadań</div>
+      <div class="chain">
+        <ng-template ngFor let-item [ngForOf]="taskTemplate.behaviours">
+          <div class="small-task-card">
+            {{item.name}}
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</mat-expansion-panel>
+
+

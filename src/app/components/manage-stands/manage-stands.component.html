@@ -1,0 +1,88 @@
+<div class="stands-container">
+  <header>
+    <h2>Zarządzaj stanowiskami</h2>
+  </header>
+
+  <main>
+    <ra-map (standChanged)='onStandChanged($event)' class="map-module" type="stands-manager" #map></ra-map>
+    <div class="list-wrapper">
+      <div class="stands-list">
+        <h4>Lista stanowisk</h4>
+        <p class="list-heading">#<span class="name-heading">Nazwa stanowiska</span></p>
+        <ol>
+          <li *ngFor="let stand of map.stands">
+            <div (click)="onStandSelect(stand.id)" class="list-item"
+                 [ngClass]="stand.id === map.selectedStandId() ? 'active' : 'list-item'">
+              <div class="list-item-header">
+                <div class="list-item-name">{{stand.name}}</div>
+                <div class="list-item-type">{{stand.standType?.name}}</div>
+              </div>
+              <div class="buttons">
+                <img (click)="onEditClick(stand.id)" src="/assets/icons/draw.png" alt="edit">
+                <img (click)="onDeleteClick(stand.id)" src="/assets/icons/bin.png" alt="delete">
+              </div>
+            </div>
+          </li>
+        </ol>
+        <button class="addButton" (click)="onAddClick()"> + Dodaj stanowisko</button>
+
+        <p-sidebar [(visible)]="displaySidebar" position="right" [modal]="false" styleClass="p-sidebar-md">
+          <form class="stand-form" [formGroup]="form" (ngSubmit)="onSaveClick()">
+
+            <h2>{{sidebarHeader}}</h2>
+
+            <h3>Dane stanowiska</h3>
+
+            <label for="stand-name-input">Nazwa stanowiska</label>
+            <input (keyup)="onStandDetailsChange()" type="text" class="field" name="stand-name-input" id="stand-name-input" placeholder="Wpisz nazwę"
+                   formControlName="name">
+
+            <label for="parking-type">Typ parkowania</label>
+            <select (click)="onStandDetailsChange()" class="field" name="parking-type-select" id="parking-type" formControlName="parkingType">
+              <option *ngFor="let parkingType of map.parkingTypes" [ngValue]="parkingType.id">{{parkingType.name}}</option>
+            </select>
+
+            <label for="stand-type">Typ stanowiska</label>
+            <select (click)="onStandDetailsChange()" class="field" name="stand-type-select" id="stand-type" formControlName="standType">
+              <option *ngFor="let standType of map.standTypes" [ngValue]="standType.id">{{standType.name}}</option>
+            </select>
+
+            <label for="kiosk-select">Kiosk</label>
+            <select (click)="onStandDetailsChange()" class="field" name="kiosk-select" id="kiosk-select" formControlName="kiosk">
+              <option *ngFor="let kiosk of map.kiosks" [ngValue]="kiosk.id">{{kiosk.name}}</option>
+            </select>
+
+            <h3>Lokalizacja</h3>
+            <p>Wprowadź dane lub wybierz lokalizację na mapie</p>
+
+            <label for="x-coordinate-input">Wartość x</label>
+            <input #xInput (keyup)="onPositionInput(xInput.value, yInput.value, orientationInput.value)" type="number"
+                   class="field" name="x-coordinate-input" id="x-coordinate-input" placeholder="Podaj wartość"
+                   formControlName="x">
+
+            <label for="y-coordinate-input">Wartość y</label>
+            <input #yInput (keyup)="onPositionInput(xInput.value, yInput.value, orientationInput.value)" type="number"
+                   class="field" name="y-coordinate-input" id="y-coordinate-input" placeholder="Podaj wartość"
+                   formControlName="y">
+
+            <label for="orientation-input">Orientacja</label>
+            <input #orientationInput  (keyup)="onPositionInput(xInput.value, yInput.value, orientationInput.value)"
+                   type="number" class="field" name="orientation-input" id="orientation-input"
+                   formControlName="orientation">
+
+            <div class="buttons-container">
+              <button type="button" class="discard-button" (click)="onDiscardClick()">
+                Porzuć zmiany
+              </button>
+
+              <button type="submit" class="addButton">
+                <img src="/assets/icons/diskette.png" alt="">
+                Zapisz
+              </button>
+            </div>
+          </form>
+        </p-sidebar>
+      </div>
+    </div>
+  </main>
+</div>

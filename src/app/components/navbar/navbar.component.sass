@@ -1,0 +1,51 @@
+.navBar
+  box-shadow: 0 0 0
+
+.navItemText
+  padding-right: 64px
+  font-size: 16px
+  //white-space: nowrap
+
+.navSubItemText
+  padding-left: 36px
+
+.navItemClicked
+  color: #487BFF
+  background: #F5F5F5
+
+  mat-icon
+    filter: invert(39%) sepia(58%) saturate(1122%) hue-rotate(196deg) brightness(105%) contrast(102%)
+
+
+::ng-deep .mat-expansion-panel-header
+  padding: 0 16px !important
+  height: 48px !important
+  text-align: center
+
+::ng-deep .mat-nav-list .mat-icon
+  margin-right: 10px
+
+::ng-deep .mat-expansion-panel-body
+  padding: 0 !important
+
+::ng-deep .mat-expansion-panel .mat-list-item
+  padding-left: 15px !important
+
+::ng-deep .mat-nav-list .is-active
+  background-color: rgb(204, 204, 204) !important
+  border-left: 8px solid rgb(139, 137, 133)
+  width: calc(100% - 8px) !important
+
+::ng-deep .mat-list-base
+  padding-top: 0 !important
+
+::ng-deep .mat-nav-list .mat-list-item.is-active .mat-list-item-content
+  padding: 0 8px
+
+.navbar-container
+  display: flex
+  flex-wrap: nowrap
+  flex-direction: column
+  justify-content: space-between
+  height: 100%
+

@@ -1,0 +1,13 @@
+<div class="dialog-container">
+    <h1 mat-dialog-title>Usuń użytkownika</h1>
+    <div mat-dialog-content>
+      <p>Czy na pewno chcesz usunąć użytkownika o następującym adresie email?</p>
+      <h2>{{data.name}}</h2>
+    </div>
+    <div mat-dialog-actions class="dialog-actions">
+      <button class="cancel" (click)="onNoClick()">Anuluj</button>
+      <button class="add" (click)="delete()">
+        Usuń
+      </button>
+    </div>
+</div>

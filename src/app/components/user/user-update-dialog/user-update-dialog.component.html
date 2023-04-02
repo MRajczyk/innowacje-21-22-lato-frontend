@@ -1,0 +1,21 @@
+<div class="dialog-container">
+  <form [formGroup]="form">
+    <h1 mat-dialog-title>Modyfikuj Użytkownika</h1>
+    <div mat-dialog-content>
+      <p>Podaj nazwę użytkownika, który chcesz zmodyfikować</p>
+      <div class="dialog-input-position">
+        <input placeholder="Nazwa" class="dialog-input" matInput [formControlName]='"name"'>
+      </div>
+      <div class="dialog-input-position">
+        <input type="password" placeholder="Hasło" class="dialog-input" matInput [formControlName]='"password"'>
+      </div>
+    </div>
+    <div mat-dialog-actions class="dialog-actions">
+      <button class="cancel" (click)="onNoClick()">Anuluj</button>
+      <button class="add" type="submit" (click)="updateUser()">
+        <img src="/assets/icons/diskette.png" alt="dis">
+        Modyfikuj
+      </button>
+    </div>
+  </form>
+</div>

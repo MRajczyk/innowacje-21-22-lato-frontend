@@ -1,0 +1,22 @@
+<mat-sidenav-container *ngIf="userService.isLoggedIn()" class="example-container">
+
+  <mat-sidenav opened mode="side" class="side-navbar">
+    <ra-navbar></ra-navbar>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="sidenav-content">
+
+    <nav class="top-bar-content">
+      <ra-topbar></ra-topbar>
+    </nav>
+
+    <main class="router-outlet-content">
+      <router-outlet></router-outlet>
+    </main>
+
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
+
+<ra-authwall *ngIf="!userService.isLoggedIn()"></ra-authwall>
+

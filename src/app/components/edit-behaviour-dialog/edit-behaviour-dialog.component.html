@@ -1,0 +1,47 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="parametersForm">
+
+  <div mat-dialog-title>
+    <h1 class="dialog-title">Edytuj zachowanie</h1>
+    <span class="dialog-description">Podaj nazwe zachowania i uzupełnij pozostałe informacje.</span>
+  </div>
+
+  <mat-dialog-content class="form-container">
+
+    <div class="form-group">
+      <label for="name">Nazwa zachowania</label>
+      <input id='name' [formControlName]='"name"' class="field">
+    </div>
+
+    <ng-container class="item-container" *ngFor="let item of parametersTemplate | keyvalue" [ngSwitch]="true">
+
+      <div class="form-group">
+        <ng-container *ngSwitchCase='item.value === "stand"'>
+          <label [for]="item.key">Wybierz odbiornik</label>
+          <select class="field" [id]="item.key" [formControlName]="item.key" placeholder="Wybierz odbiornik">
+              <option [ngValue]='"stand"' class="dropdown-item">
+                Brak
+              </option>
+              <option *ngFor="let stand of stands | async" [ngValue]="stand.id" class="dropdown-item">
+                {{stand.name}}
+              </option>
+            </select>
+        </ng-container>
+
+        <ng-container *ngSwitchCase='item.value === ""'>
+          <label [for]="item.key">Treść wiadomości</label>
+          <textarea rows="3" [id]="item.key" [formControlName]="item.key" class="field big-field" placeholder="Podaj treść...">
+          </textarea>
+        </ng-container>
+
+      </div>
+
+    </ng-container>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button class="cancel-button" mat-button type="button" (click)="onNoClick()">Anuluj</button>
+    <button class="submit-button" mat-button type="submit" cdkFocusInitial>Utwórz</button>
+  </mat-dialog-actions>
+
+</form>
+

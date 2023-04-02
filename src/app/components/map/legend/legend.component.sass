@@ -1,0 +1,68 @@
+.show-legend-button
+    position: absolute
+    left: 20px
+    bottom: 20px
+    background: white
+    width: 45px
+    height: 45px
+    border-radius: 50%
+    border: none
+    transition: .2s ease-in
+
+.show-legend-button:hover
+    background: #f3f3f3
+
+.legend-card
+    position: absolute
+    left: 70px
+    bottom: 70px
+    border-radius: 7px
+    overflow: hidden
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1)
+
+    ::ng-deep .p-tabview .p-tabview-nav li
+        width: 100%
+
+    ::ng-deep .p-tabview .p-tabview-nav li a span
+        font-weight: 600
+        margin: 0 auto
+
+    ::ng-deep .p-tabview .p-tabview-nav li .p-tabview-nav-link:focus
+        background: none
+
+    ::ng-deep .p-tabview .p-tabview-nav .p-tabview-ink-bar
+        background-color: var(--main-color)
+
+    ::ng-deep .p-tabview .p-tabview-nav-link
+        padding: 20px 40px !important
+        height: 100%
+
+    ::ng-deep .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link
+        color: var(--main-color)
+
+    ::ng-deep .p-tabview
+        width: max-content
+
+    ul
+        list-style-type: none
+        padding: 0
+        margin: 0
+
+    .legend-list
+        padding: 0 10px
+
+        .legend-item
+            margin-bottom: 7px
+
+            .legend-item-icon
+                width: 20px
+                height: auto
+                margin-bottom: 2px
+
+            .legend-item-name
+                margin-left: 10px
+                font-size: 15px
+                color: var(--font-color)
+
+        .legend-item::last-child
+            margin-bottom: 0

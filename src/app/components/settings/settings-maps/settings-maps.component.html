@@ -1,0 +1,71 @@
+<div class="container p-1">
+
+  <div class="row map-container pb-5">
+    <div class="col-3">
+      <span>Ustawienia mapy</span>
+    </div>
+    <div class="col">
+      <div class="settings-section">
+        <div class="settings-item">
+          <select [ngModel]="currentMap" class="select-data" (ngModelChange)="onCurrentMapChange($event)">
+            <option [ngValue]="item" *ngFor="let item of mapsData" [selected]="item.id === this.currentMap.mapId">
+              {{item.name}}
+            </option>
+          </select>
+        </div>
+        <div class="settings-item">
+          <span class="key">ID mapy</span>
+          <span>{{currentMap.mapId}}</span>
+        </div>
+        <div class="settings-item">
+          <span class="key">Rozdzielczość obrazu</span>
+          <span>{{currentMap.size.toString().split(",")[0]}}x{{currentMap.size.toString().split(",")[1]}}</span>
+        </div>
+        <div class="settings-item">
+          <span class="key">Rozdzielczość mapy</span>
+          <span>{{currentMap.resolution}}x{{currentMap.resolution}}</span>
+        </div>
+        <div class="settings-item">
+          <span class="key">Origin mapy</span>
+          <span>x: {{currentMap.origin.toString().split(",")[0]}},y: {{currentMap.origin.toString().split(",")[1]}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-3">
+      <span>Ustawienia grafu</span>
+    </div>
+    <div class="col">
+      <div class="row">
+        <div class="settings-section">
+          <div class="settings-item">
+            <select class="select-data"
+                    [ngModel]="currentGraph"
+                    (ngModelChange)="onCurrentGraphChange($event)"
+                    >
+              <option [ngValue]="item" *ngFor="let item of graphs; trackBy:identify"
+                      [selected]="item.id === this.currentMap.graphId">
+                {{item.id}}
+              </option>
+            </select>
+          </div>
+          <div class="settings-item">
+            <span class="key">Szerokość korytarza ruchu robota</span>
+            <span>34567</span>
+          </div>
+          <div class="settings-item">
+            <span class="key">Szerokość korytarza celu dojazdowego</span>
+            <span>3123</span>
+          </div>
+          <div class="settings-item">
+            <span class="key">Odsunięcie robota od osi drogi</span>
+            <span>321</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

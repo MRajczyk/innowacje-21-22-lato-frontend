@@ -1,0 +1,98 @@
+<div class="container">
+  <header *ngIf="map.isSelectedGraphEdited()">
+    Powrót
+    <p-selectButton [options]="map.graphsEditModesOptions" optionLabel="label" optionValue="value"
+                    [(ngModel)]="map.graphEditMode" (click)="onEditModeChanged()">
+    </p-selectButton>
+  </header>
+  <header *ngIf="!map.isSelectedGraphEdited()">
+    <h2>Zarządzaj trasami</h2>
+  </header>
+  <main>
+    <ra-map class="map-module" type="routes-manager" (graphSettingsChanged)="onGraphSettingsChanged($event)" #map></ra-map>
+    <div class="list-wrapper">
+      <div class="graphs-list">
+        <h4>Lista tras</h4>
+        <p class="list-heading">#<span class="name-heading">Nazwa trasy</span></p>
+        <ol>
+          <li *ngFor="let graph of map.graphs">
+            <div class="list-item" (click)="onSelectGraph(graph.id)"
+                 [ngClass]="graph.id === map.selectedGraphId() ? 'active' : 'list-item'">
+              <div class="list-item-header">
+                <div class="list-item-name">{{graph.id}}</div>
+              </div>
+              <div class="buttons">
+                <img (click)="onEditGraphClick(graph.id, false)" src="/assets/icons/draw.png" alt="edit">
+                <img (click)="onDeleteGraphClick(graph.id)" src="/assets/icons/bin.png" alt="delete">
+              </div>
+            </div>
+          </li>
+        </ol>
+        <button class="addButton" (click)="onAddGraphClick()"> + Dodaj trasę </button>
+
+        <p-sidebar [(visible)]="displaySidebar" position="right" [modal]="false" styleClass="p-sidebar-md">
+          <form class="graph-form" (ngSubmit)="onSaveGraphClick()" [formGroup]="graphForm">
+
+            <h2>{{sidebarHeader}}</h2>
+
+            <h3>Dane stanowiska</h3>
+
+            <label for="name-input">Nazwa trasy</label>
+            <input type="text" class="field" name="graph-name-input" placeholder="Wpisz nazwę"
+                   id="name-input" formControlName="name">
+
+            <label for="corridor-width-input">Szerokosc korytarza ruchu robota</label>
+            <input type="text" class="field field-short" name="graph-name-input"
+                   id="corridor-width-input" formControlName="corridorWidth">
+            <label for="corridor-width-input">cm</label>
+
+            <label for="offset-input">Odsunięcie robota od osi drogi</label>
+            <input type="text" class="field field-short" name="graph-name-input"
+                   id="offset-input" formControlName="offsetFromAxis">
+            <label for="offset-input">cm</label>
+
+            <label for="width-around-input">Szerokość korytarza dookoła celu</label>
+            <input type="text" class="field field-short" name="graph-name-input"
+                   id="width-around-input" formControlName="widthAroundTarget">
+            <label for="width-around-input">cm</label>
+
+            <div class="buttons-container">
+              <button type="button" class="discard-button" (click)="onTryDiscardChangesClick()">
+                Porzuć zmiany
+              </button>
+
+              <button type="submit" class="addButton">
+                <img src="/assets/icons/diskette.png" alt="">
+                Zapisz
+              </button>
+            </div>
+          </form>
+        </p-sidebar>
+      </div>
+    </div>
+  </main>
+
+  <p-dialog [(visible)]="displayNewGraphDialog" class="creation-dialog" [draggable]="false" [resizable]="false">
+    <ng-template pTemplate="header">
+      Utwórz trasę
+    </ng-template>
+    <p>Podaj nazwę trase, a następnie zdecyduj czy chcesz go skonfigurować.</p>
+    <input type="text" class="field" [value]="DEFAULT_NAME" #newGraphName>
+    <ng-template pTemplate="footer">
+      <p-button (click)="displayNewGraphDialog=false" label="Anuluj" styleClass="p-button-text p-button-danger"></p-button>
+      <p-button (click)="onAddGraphAcceptClick(false)" label="Pomiń konfigurację" styleClass="p-button-text p-button-primary"></p-button>
+      <p-button (click)="onAddGraphAcceptClick(true);showSidebar(false)" label="Konfiguruj" styleClass="p-button-primary"></p-button>
+    </ng-template>
+  </p-dialog>
+
+  <p-dialog [(visible)]="displayCancelCheck" class="creation-dialog" [draggable]="false" [resizable]="false">
+    <ng-template pTemplate="header">
+      Cofnij i porzuć zmiany
+    </ng-template>
+    <p>Czy na pewno chcesz cofnąc się do widoku podglądu tras i porzucić wprowadzone zmiany?</p>
+    <ng-template pTemplate="footer">
+      <p-button (click)="displayCancelCheck=false" label="Pozostań w edytorze" styleClass="p-button-text p-button-primary"></p-button>
+      <p-button (click)="onDiscardChangesClick()" label="Porzuć zmiany" styleClass="p-button-danger"></p-button>
+    </ng-template>
+  </p-dialog>
+</div>
